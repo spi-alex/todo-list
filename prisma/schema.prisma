@@ -1,0 +1,22 @@
+// Schema do banco de dados (Prisma ORM 7 + PostgreSQL)
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+// A URL de conexão fica em prisma.config.ts (lida do .env -> DATABASE_URL)
+datasource db {
+  provider = "postgresql"
+}
+
+model Task {
+  id String @id @default(cuid())
+  title String
+  description String?
+  completed Boolean @default(false)
+  userId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
